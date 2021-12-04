@@ -3,7 +3,6 @@ using namespace std;
 
 int table[5007][5007];
 
-
 string LCS(string str1, string str2) 
 { 
     int m = str1.length();
@@ -11,7 +10,7 @@ string LCS(string str1, string str2)
     string lcs = "";
     int table[m+1][n+1]; 
     int i, j; 
-    
+    //length of lcs
     for(i = 0; i <= m; i++) 
     { 
         for(j = 0; j <= n; j++) 
@@ -25,6 +24,7 @@ string LCS(string str1, string str2)
         } 
     } 
     
+    //accual lcs
     i = m, j = n;
     while(i > 0 && j > 0)
     {

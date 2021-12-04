@@ -6,7 +6,7 @@ ll tab[200007];
 ll tree[50000007];
 ll limit = 1;
 
-void sum(ll v, ll x)
+void change(ll v, ll x)
 {
     ll add = x - tab[v];
     tab[v] = x;
@@ -73,7 +73,7 @@ int main()
         cin >> type >> a >> b;
         if(type == 1)
         {
-            sum(a, b);
+            change(a, b);
         }
         else
         {
