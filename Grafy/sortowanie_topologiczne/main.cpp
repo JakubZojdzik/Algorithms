@@ -27,13 +27,10 @@ int main()
             kolejka.push(i);
         }
     }
-    //cout << "ODP: ";
     while(!kolejka.empty())
     {
         int teraz = kolejka.front();
         kolejka.pop();
-        cout << teraz << " ";
-        //cout << "mam " << krawedzie[teraz].size() << " krawedzi\n";
         for(int i = 0; i < krawedzie[teraz].size(); i++)
         {
             ile_laczen[krawedzie[teraz][i]]--;
