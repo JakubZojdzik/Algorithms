@@ -46,7 +46,7 @@ int main()
 
     // bfs z zapamietywaniem wiersza w ktorym jestesmy
     int wiersz = 1;
-    while(true)
+    while(!kol.empty())
     {
         int s = kol.size();
         for(int i = 0; i < s; i++)
