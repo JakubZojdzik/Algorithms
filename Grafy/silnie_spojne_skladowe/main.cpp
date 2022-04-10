@@ -27,8 +27,8 @@ void dfs2(int a, int c)
 
 int main()
 {
-    // cin.tie(NULL); cout.tie(NULL);
-    // ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    ios_base::sync_with_stdio(false);
 
     int n, m, a, b;
     cin >> n >> m; // n - wierzchołki, m - krawędzie
@@ -51,11 +51,3 @@ int main()
     for(int i = 1; i <= n; i++)
         cout << "Wierzchołek " << i << " należy do " << skladowa[i] << '\n';
 }
-
-/*
-4 4
-1 3
-3 2
-2 1
-4 3
-*/

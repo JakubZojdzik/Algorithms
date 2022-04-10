@@ -6,27 +6,71 @@ class lint // lint = large int ;)
 {
 public:
     string value;
-
-    lint(string v = "0") : value(v){};
+    lint();
+    lint(string v);
+    lint(int v);
+    lint(long long v);
     lint operator=(const lint &b);
+    lint operator=(const int &b);
+    lint operator=(const long long &b);
     bool operator==(const lint &b);
     bool operator>(const lint &b);
     bool operator<(const lint &b);
     bool operator>=(const lint &b);
     bool operator<=(const lint &b);
+    void repair();
     lint operator+(const lint &b);
     lint operator-(const lint &b);
     lint operator*(const lint &b);
     lint operator/(const int &b);
+    void operator+=(const lint &b);
+    void operator-=(const lint &b);
+    void operator*=(const lint &b);
+    void operator/=(const int &b);
     lint operator++();
     lint operator--();
     lint operator++(int);
     lint operator--(int);
 };
 
+lint::lint()
+{
+    value = "0";
+}
+
+lint::lint(string v)
+{
+    value = v;
+    if(value == "") value = "0";
+    repair();
+}
+
+lint::lint(int v)
+{
+    value = to_string(v);
+}
+
+lint::lint(long long v)
+{
+    value = to_string(v);
+}
+
 lint lint::operator=(const lint &b)
 {
     value = b.value;
+    repair();
+    return *this;
+}
+
+lint lint::operator=(const int &b)
+{
+    value = to_string(b);
+    return *this;
+}
+
+lint lint::operator=(const long long &b)
+{
+    value = to_string(b);
     return *this;
 }
 
@@ -212,21 +256,44 @@ lint lint::operator/(const int &b)
     return lint(ans);
 }
 
+void lint::operator+=(const lint &b)
+{
+    *this = *this + b;
+}
+
+void lint::operator-=(const lint &b)
+{
+    *this = *this - b;
+}
+
+void lint::operator*=(const lint &b)
+{
+    *this = *this * b;
+}
+
+void lint::operator/=(const int &b)
+{
+    *this = *this / b;
+}
+
 lint lint::operator++()
 {
     *this = *this + lint("1");
+    repair();
     return *this;
 }
 
 lint lint::operator--()
 {
     *this = *this - lint("1");
+    repair();
     return *this;
 }
 
 lint lint::operator++(int)
 {
     lint temp = *this;
+    repair();
     ++*this;
     return temp;
 }
@@ -234,6 +301,7 @@ lint lint::operator++(int)
 lint lint::operator--(int)
 {
     lint temp = *this;
+    repair();
     --*this;
     return temp;
 }
@@ -246,4 +314,23 @@ ostream &operator<<(std::ostream &os, lint const &m)
 ostream &operator>>(std::ostream &os, lint const &m)
 { 
     return os >> m.value;
+}
+
+void lint::repair()
+{
+    if(value == "0") return;
+    for(int i = 0; i < value.size(); i++)
+    {
+        if(value[i] != '0') break;
+        value.erase(0, 1);
+    }
+}
+
+int main()
+{
+    auto a = lint(15);
+    auto b = lint(2);
+    b += a;
+    a += b;
+    cout << a << ", " << b << '\n';
 }

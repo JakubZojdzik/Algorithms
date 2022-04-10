@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// "Mam bardzo długi kod, ale jest fajny lubię go" ~Jakub Żółdzik
+
 long long sumy[1000007];
 constexpr int mod = 1000000007;
 long long potegi[1000009];

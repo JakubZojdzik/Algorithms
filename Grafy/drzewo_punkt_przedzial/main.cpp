@@ -10,11 +10,11 @@ void change(ll v, ll x)
 {
     ll add = x - tab[v];
     tab[v] = x;
-    ll pkt = limit/2+v;
+    ll pkt = limit+v;
     while(pkt > 1)
     {
         tree[pkt] += add;
-        pkt /= 2;
+        pkt >>= 1;
     }
     tree[1] += add;
 }
@@ -26,9 +26,9 @@ ll query(ll a, ll b)
     {
         return tab[a];
     }
-    a = limit/2+a;
-    b = limit/2+b;
-    while(a/2 != b/2)
+    a = limit+a;
+    b = limit+b;
+    while((a>>1) != (b>>1))
     {
         if(a%2 == 0)
         {
@@ -38,8 +38,8 @@ ll query(ll a, ll b)
         {
             wynik += tree[b-1];
         }
-        a /= 2;
-        b /= 2;
+        a >>= 1;
+        b >>= 1;
     }
     return wynik;
 }
@@ -53,18 +53,17 @@ int main()
     ll n, q, type, a, b;
     cin >> n >> q;
     
-    while(limit < n)
+    while (limit <= n)
     {
-        limit *= 2;
+        limit <<= 1;
     }
-    limit = limit*2-1;
     for(int i = 1; i <= n; i++)
     {
         cin >> tab[i];
-        tree[limit/2+i] = tab[i];
+        tree[limit+i] = tab[i];
     }
 
-    for(int i = limit/2; i > 0; i--)
+    for(int i = limit; i > 0; i--)
     {
         tree[i] = tree[2*i] + tree[2*i+1];
     }
