@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// "Mam bardzo długi kod, ale jest fajny lubię go" ~Jakub Żółdzik
+// "Mam bardzo długi kod, ale jest fajny lubię go" ~ Jakub Żółdzik
 
 long long sumy[1000007];
 constexpr int mod = 1000000007;
@@ -25,7 +25,7 @@ bool czy_rowne(long long p1, long long k1, long long p2, long long k2)
       drug = sumy[k2] - sumy[p2-1];
    else
       drug = sumy[k2];
-   
+
    if(pier < 0)
       pier += mod;
    if(drug < 0)
@@ -45,7 +45,7 @@ int main()
    {
       potegi[i] = (potegi[i-1] * 31) % mod;
    }
-   
+
    sumy[0] = int(napis[0])-'a'+1;
    for(int i = 1; i < napis.size(); i++)
    {

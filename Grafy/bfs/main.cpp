@@ -2,7 +2,7 @@
 using namespace std;
 
 vector<int> kraw[100007];
-vector<int> kol;
+queue<int> kol;
 bool odwiedzony[100007];
 
 int main()
@@ -51,14 +51,14 @@ int main()
         int s = kol.size();
         for(int i = 0; i < s; i++)
         {
-            int w = kol[0];
-            kol.pop_back();
+            int w = kol.front();
+            kol.pop();
             // TUTAJ TRZYMAMY I-TY WIERZCHOŁEK GRAFU W ZMIENNEJ 'w' ZNAJDUJĄCY SIĘ W WIERSZU 'wiersz'
             for(int j = 0; j < kraw[w].size(); j++)
             {
                 if(!odwiedzony[kraw[w][j]])
                 {
-                    kol.push_back(kraw[w][j]);
+                    kol.push(kraw[w][j]);
                     odwiedzony[kraw[w][j]] = true;
                 }
             }
