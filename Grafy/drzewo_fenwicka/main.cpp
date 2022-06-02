@@ -7,10 +7,7 @@ long long fenwick[M];
 void add(int v, int x)
 {
     if(v < 1)
-    {
-        cout << "ERROR\n";
-        exit(420);
-    }
+        exit(2137420);
     while(v < M)
     {
         fenwick[v] += x;

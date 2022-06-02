@@ -1,7 +1,7 @@
 On może mieć więcej niż dwóch dzieci ~Adam
 Wszyscy zamykamy oczy ~Adam
 no i wszystkie sposoby przelecieć ~Adam
-Ale też tutaj jest jakis string, a to jest skąplikowane ~Adam
+Ale też tutaj jest jakis string, a to jest skomplikowane ~Adam
 Wszyści, wszyscy, szyśćy, szyścy, wszyyyy... wszyscy nasi synowie ~Adam
 Ja jestem optymalny, ale nie wiem czy kogoś nie pogorsze albo nie polepsze ~Adam
 jestem wierzchołkiem ~Adam
@@ -17,3 +17,12 @@ Lecimy dalej ~ Adam
 I wszystko klasycznie ~ Adam
 -Chyba już mnie nie lubi; -A który to?; -Taki duży trochę; -To już wiem kogo unikać;
 -Ten kod się i tak już ledwo trzyma; -Każdy kod zawsze; ~ Ja i Piotr
+W czasie stałym z taką stałą... no większą trochę ~ Adam
+Może to dlatego że już długą przerwę miałem od wyjaśniania
+Skłamałem ~ Adam
+Skłamałem x2
+To jest logarytmicznie, a ja chce logarytmicznie
+jaki jest pozycja
+nieuwzgledniajmy ujemnych 
+Nie wiem czy próbowaliście ale jest takie cos jak BCD
+minumum to funkcja łączna i rozdzielna, albo i nie rozdzielna...
