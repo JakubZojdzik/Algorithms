@@ -33,29 +33,29 @@ int main()
     trojki.push_back(curr2);
     if (__gcd(trojki[0].x, trojki[0].y) != 0)
     {
-        int nwd = __gcd(trojki[0].x, trojki[0].y);
+        ll nwd = __gcd(trojki[0].x, trojki[0].y);
         trojki[0].x /= nwd;
         trojki[0].y /= nwd;
         trojki[0].k /= nwd * nwd;
     }
     if (__gcd(trojki[1].x, trojki[1].y) != 0)
     {
-        int nwd = __gcd(trojki[1].x, trojki[1].y);
+        ll nwd = __gcd(trojki[1].x, trojki[1].y);
         trojki[1].x /= nwd;
         trojki[1].y /= nwd;
         trojki[1].k /= nwd * nwd;
     }
 
     ll w, m;
-    int nrtrojki1, nrtrojki2;
+    ll nrtrojki1, nrtrojki2;
     trojka jed, dwa;
     while (1)
     {
-        for (int i = 0; i < trojki.size(); i++)
+        for (ll i = 0; i < trojki.size(); i++)
         {
             cout << i << ": (" << trojki[i].x << ", " << trojki[i].y << ", " << trojki[i].k << ")\n";
         }
-        if (trojki[trojki.size() - 1].k == 1)
+        if (trojki[trojki.size() - 1].k == 1 && trojki[trojki.size() - 1].y != 0)
         {
             cout << "BRAWO! Przykładowe rozwiązania równania x^2 - " << D << "y^2 = 1 to x = " << trojki[trojki.size() - 1].x << "; y = " << trojki[trojki.size() - 1].y << '\n';
             return 0;
@@ -81,11 +81,14 @@ int main()
             jed = trojki[nrtrojki1];
             cout << "Podaj takie m, że " << jed.k << " dzieli (" << jed.x << " + " << jed.y << " * m)\n";
             m = -1;
-            for (int i = 0; i <= abs(jed.k); i++)
-                if ((jed.x + jed.y * i) % jed.k == 0)
-                    if (m == -1 || abs(m * m - D) > abs(i * i - D))
-                        m = i;
-            cout << "Proponowane m = " << m << '\n';
+            if(jed.k <= 1e7)
+            {
+                for (int i = -abs(jed.k); i <= abs(jed.k); i++)
+                    if ((jed.x + jed.y * i) % jed.k == 0)
+                        if (m == -1 || abs(m * m - D) > abs(i * i - D))
+                            m = i;
+                cout << "Proponowane m = " << m << '\n';
+            }
             cin >> m;
             if ((jed.x + jed.y * m) % jed.k == 0)
                 trojki.push_back(trojka((jed.x * m + D * jed.y) / jed.k, (jed.x + jed.y * m) / jed.k, (m * m - D) / jed.k));
@@ -122,13 +125,13 @@ int main()
             }
             else if (jed.k == -4)
             {
-                trojki.push_back(trojka(((jed.x * jed.x + 2) * ((jed.x * jed.x + 1) * (jed.x * jed.x + 3) - 2)) / 2, (jed.x * jed.y * (jed.x * jed.x + 3) * (jed.x * jed.x + 1)) / 2));
+                trojki.push_back(trojka(((jed.x * jed.x + 2) * ((jed.x * jed.x + 1) * (jed.x * jed.x + 3) - 2)) / 2, (jed.x * jed.y * (jed.x * jed.x + 3) * (jed.x * jed.x + 1)) / 2, 1));
             }
             break;
         }
         if (__gcd(trojki[trojki.size() - 1].x, trojki[trojki.size() - 1].y) != 0)
         {
-            int nwd = __gcd(trojki[trojki.size() - 1].x, trojki[trojki.size() - 1].y);
+            ll nwd = __gcd(trojki[trojki.size() - 1].x, trojki[trojki.size() - 1].y);
             trojki[trojki.size() - 1].x /= nwd;
             trojki[trojki.size() - 1].y /= nwd;
             trojki[trojki.size() - 1].k /= nwd * nwd;
