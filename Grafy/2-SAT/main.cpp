@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+/////////////////
 vector<int> kraw[307];
 int skladowa[307];
 bool seen[307];
