@@ -127,22 +127,6 @@ rlint rlint::operator+(const rlint &b)
     if(res.value.size()>1 && res.value[res.value.size()-1] == 0) res.value.pop_back();
     return res;
 }
-/*
-rlint rlint::operator-(const rlint &b)
-{
-
-}
-
-rlint rlint::operator*(const rlint &b)
-{
-
-}
-
-rlint rlint::operator/(const int &b)
-{
-
-}
-*/
 
 int main()
 {
