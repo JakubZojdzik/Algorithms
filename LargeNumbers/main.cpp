@@ -41,7 +41,8 @@ lint::lint()
 lint::lint(string v)
 {
     value = v;
-    if(value == "") value = "0";
+    if (value == "")
+        value = "0";
     repair();
 }
 
@@ -137,22 +138,22 @@ lint lint::operator+(const lint &b)
     int n1 = str1.length(), n2 = str2.length();
     reverse(str1.begin(), str1.end());
     reverse(str2.begin(), str2.end());
- 
+
     int carry = 0;
-    for (int i=0; i<n1; i++)
+    for (int i = 0; i < n1; i++)
     {
-        int sum = ((str1[i]-'0')+(str2[i]-'0')+carry);
-        str.push_back(sum%10 + '0');
-        carry = sum/10;
+        int sum = ((str1[i] - '0') + (str2[i] - '0') + carry);
+        str.push_back(sum % 10 + '0');
+        carry = sum / 10;
     }
-    for (int i=n1; i<n2; i++)
+    for (int i = n1; i < n2; i++)
     {
-        int sum = ((str2[i]-'0')+carry);
-        str.push_back(sum%10 + '0');
-        carry = sum/10;
+        int sum = ((str2[i] - '0') + carry);
+        str.push_back(sum % 10 + '0');
+        carry = sum / 10;
     }
     if (carry)
-        str.push_back(carry+'0');
+        str.push_back(carry + '0');
     reverse(str.begin(), str.end());
     return lint(str);
 }
@@ -245,7 +246,7 @@ lint lint::operator/(const int &b)
     int temp = number[idx] - '0';
     while (temp < b)
         temp = temp * 10 + (number[++idx] - '0');
-    while (number.size() > idx) 
+    while (number.size() > idx)
     {
         ans += (temp / b) + '0';
         temp = (temp % b) * 10 + number[++idx] - '0';
@@ -307,21 +308,23 @@ lint lint::operator--(int)
 }
 
 ostream &operator<<(std::ostream &os, lint const &m)
-{ 
+{
     return os << m.value;
 }
 
 ostream &operator>>(std::ostream &os, lint const &m)
-{ 
+{
     return os >> m.value;
 }
 
 void lint::repair()
 {
-    if(value == "0") return;
-    for(int i = 0; i < value.size(); i++)
+    if (value == "0")
+        return;
+    for (int i = 0; i < value.size(); i++)
     {
-        if(value[i] != '0') break;
+        if (value[i] != '0')
+            break;
         value.erase(0, 1);
     }
 }
