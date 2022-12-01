@@ -1,124 +1,79 @@
+
+// Sparse Matrix DP approach to find LCA of two nodes
 #include <bits/stdc++.h>
 using namespace std;
+#define MAXN 100007
+#define level 18
 
-constexpr int LIMIT = 1007;
+vector<int> tree[MAXN];
+int depth[MAXN];
+int parent[MAXN][level];
 
-vector<int> kraw[LIMIT];
-bool seen[LIMIT];
-int lev[LIMIT];    // poziom wierzchołka w drzewie
-int up[LIMIT][12]; // up[v][k] - wierzchołek gdy z v pójdziemy 2^k w górę
-
-void dfs(int v, int from, int p)
+void dfs(int cur, int prev)
 {
-    up[v][0] = from;
-    seen[v] = true;
-    lev[v] = p;
-    for (int i = 0; i < kraw[v].size(); i++)
-        if (!seen[kraw[v][i]])
-            dfs(kraw[v][i], v, p + 1);
-}
-
-int move_up(int v, int l) // składamy kilka ruchów o potęgę 2 w ruch o l
-{
-    for (int i = 0; l > 0; i++)
+    depth[cur] = depth[prev] + 1;
+    parent[cur][0] = prev;
+    for (int i = 0; i < tree[cur].size(); i++)
     {
-        if (l & 1)
-            v = up[v][i];
-        l = l >> 1;
+        if (tree[cur][i] != prev)
+            dfs(tree[cur][i], cur);
     }
-    return v;
 }
 
-int lca(int v, int w)
+void precomputeSparseMatrix(int n)
 {
-    if (lev[w] < lev[v])
-        swap(v, w);              //w będzie zawsze niewyżej w drzewie niż v
-    w = move_up(w, lev[w] - lev[v]); // wyrównanie wierzchołków
-    if(w == v) return w;
-    //binarne szukanie wspólnego wierzchołka
-    int p = lev[w], k = 0, s;
-    s = (p + k) / 2;
-    while (up[v][0] != up[w][0])
+    for (int i = 1; i < level; i++)
+        for (int node = 1; node <= n; node++)
+            if (parent[node][i - 1] != -1)
+                parent[node][i] = parent[parent[node][i - 1]][i - 1];
+}
+
+int lca(int u, int v)
+{
+    if (depth[v] < depth[u])
+        swap(u, v);
+
+    int diff = depth[v] - depth[u];
+    for (int i = 0; i < level; i++)
+        if ((diff >> i) & 1)
+            v = parent[v][i];
+
+    if (u == v)
+        return u;
+
+    for (int i = level - 1; i >= 0; i--)
     {
-        s = (p + k) / 2;
-        if (move_up(v, lev[v] - s) != move_up(w, lev[w] - s))
+        if (parent[u][i] != parent[v][i])
         {
-            v = move_up(v, lev[v] - s);
-            w = move_up(w, lev[w] - s);
-            p = lev[w];
+            u = parent[u][i];
+            v = parent[v][i];
         }
-        else k = s;
     }
-    return up[v][0];
+    return parent[u][0];
+}
+
+void addEdge(int u, int v)
+{
+    tree[u].push_back(v);
+    tree[v].push_back(u);
 }
 
 int main()
 {
-    cin.tie(NULL); cout.tie(NULL);
-    ios_base::sync_with_stdio(false);
-    int q;
-    cin >> q;
-    for (int Q = 1; Q <= q; Q++)
-    {
-        
-        int n, a, b;
-        cin >> n;
-        for (int i = 0; i < LIMIT; i++)
-        {
-            kraw[i].clear();
-            seen[i] = false;
-            lev[i] = 0;
-            for (int j = 0; j < 12; j++)
-            {
-                up[i][j] = 0;
-            }
-        }
-        for (int i = 1; i <= n; i++)
-        {
-            int m;
-            cin >> m;
-            for (int j = 1; j <= m; j++)
-            {
-                cin >> a;
-                kraw[a].push_back(i);
-                kraw[i].push_back(a);
-            }
-        }
-        dfs(1, 1, 0); // korzeń w 1
-        for (int v = 1; v <= n; v++)
-        {
-            for (int k = 1; lev[n] - pow(2, k) >= 0; k++)
-            {
-                up[v][k] = up[up[v][k - 1]][k - 1];
-            }
-        }
-        cout << "Case " << Q << ": \n";
-        int t;
-        cin >> t;
-        for (int i = 0; i < t; i++)
-        {
-            cin >> a >> b;
-            cout << lca(a, b) << '\n';
-        }
-    }
-}
+    memset(parent, -1, sizeof(parent));
+    int n = 8;
+    addEdge(1, 2);
+    addEdge(1, 3);
+    addEdge(2, 4);
+    addEdge(2, 5);
+    addEdge(2, 6);
+    addEdge(3, 7);
+    addEdge(3, 8);
+    depth[0] = 0;
 
-/*
-1
-13
-3 2 3 4
-0
-3 5 6 7
-0
-0
-2 8 9
-2 10 11
-0
-0
-2 12 13
-0
-0
-0
-1
-8 11
-*/
+    dfs(1, 0);
+    precomputeSparseMatrix(n);
+
+    cout << "LCA(4, 7) = " << lca(4, 7) << endl;
+    cout << "LCA(4, 6) = " << lca(4, 6) << endl;
+}
