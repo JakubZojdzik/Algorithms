@@ -1,78 +1,72 @@
+/*
+    Jakub Żojdzik
+    05-12-2022
+*/
+
 #include <bits/stdc++.h>
+#ifdef LOCAL
+#include "debug.hpp"
+#else
+#define debug(...)
+#define dt
+#endif
 using namespace std;
+
 typedef long long ll;
+typedef unsigned long long ull;
+typedef double db;
+typedef pair<int, int> pii;
+typedef pair<long long, long long> pll;
+typedef vector<int> vi;
+typedef vector<long long> vll;
+typedef vector<pair<int, int>> vpii;
+typedef vector<pair<long long, long long>> vpll;
 
-deque<pair<ll, ll>> K;
+#define fi first
+#define se second
+#define pb push_back
+#define rep(i, x, y) for(ll i = (ll)x; i <= (ll)y; i++)
+#define all(x) x.begin(), x.end()
+#define sz(x) (ll)(x).size()
+#define nl cout << '\n'
 
-void push_element(ll x)
+deque<pair<ll, ll>> kol;
+
+void push(ll x)
 {
     ll cnt = 0;
-    while(!K.empty() && K.back().first >= x)
+    while(!kol.empty() && kol.back().fi >= x)
     {
-        cnt += K.back().second + 1;
-        K.pop_back();
+        cnt += kol.back().se + 1;
+        kol.pop_back();
     }
-    K.push_back(make_pair(x, cnt));
+    kol.push_back({x, cnt});
 }
 
-void pop_element()
+void pop()
 {
-    if(K.front().second == 0)
-        K.pop_front();
-    else
-        K.front().second--;
+    if(kol.front().second == 0) kol.pop_front();
+    else kol.front().second--;
 }
 
-ll min_element()
+ll top()
 {
-    return K.front().first;
+    return kol.front().fi;
 }
 
 int main()
 {
-    cin.tie(0); cout.tie(0);
-    ios_base::sync_with_stdio(0);
+    cout.tie(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-    push_element(5);
-    cout << min_element() << '\n';
-    push_element(3);
-    cout << min_element() << '\n';
-    push_element(4);
-    cout << min_element() << '\n';
-    push_element(1);
-    cout << min_element() << '\n';
-    push_element(5);
-    push_element(4);
-    push_element(8);
-    push_element(4);
-    push_element(6);
-    push_element(8);
-    push_element(9);
-    push_element(8);
-    cout << min_element() << '\n';
-    cout << "ZACZYNAM USUWANIE\n";
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
-    pop_element();
-    cout << min_element() << '\n';
+    push(1);
+    push(5);
+    pop();
+    cout << top() << '\n';
+    push(2);
+    push(3);
+    cout << top() << '\n';
+    pop();
+    pop();
+    cout << top() << '\n';
 }
