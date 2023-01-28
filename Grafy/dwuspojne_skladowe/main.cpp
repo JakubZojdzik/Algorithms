@@ -51,21 +51,28 @@ void calc_depth(int v, int from)
     }
 }
 
-void dfs(int x)
+// Jeżeli root ma stopień conajmniej 2, to również jest punktem artykulacji
+int dfs(int x, int from)
 {
+    int res = 0;
     seen[x] = 1;
     low[x] = depth[x];
+    cout << "akt: " << x << '\n';
+    bool jest = 1, lisc = 1;
     for(int i = 0; i < sz(kraw[x]); i++)
     {
+        if(kraw[x][i] == from) continue;
         if(seen[kraw[x][i]] == 0)
         {
-            dfs(x);
+            res++;
+            lisc = 0;
+            dfs(kraw[x][i], x);
             // x jest podejrzany o bycie punktem artykulacji lub należy do mostu
-            if(low[kraw[x][i]] >= depth[x])
+            if(!(low[kraw[x][i]] >= depth[x]))
             {
-                AP.pb(x);
+                jest = 0;
             }
-            if(low[kraw[x][i]] >= depth[kraw[x][i]])
+            if(low[kraw[x][i]] == depth[kraw[x][i]])
             {
                 mosty.pb({x, kraw[x][i]});
             }
@@ -76,18 +83,56 @@ void dfs(int x)
             low[x] = min(low[x], depth[kraw[x][i]]);
         }
     }
-
-    seen[x] = 2;
+    if(jest && (!lisc) && x != from) AP.pb(x);
+    return res;
 }
 
 int main()
 {
-    cout.tie(0);
-    cin.tie(0)->sync_with_stdio(0);
+    // cout.tie(0);
+    // cin.tie(0)->sync_with_stdio(0);
 
-    
+    int n, m, a, b;
+    cin >> n >> m;
+    for(int i = 0; i < m; i++)
+    {
+        cin >> a >> b;
+        kraw[a].pb(b);
+        kraw[b].pb(a);
+    }
+    cout << "wczytane\n";
+    calc_depth(1, 1);
+    for(int i = 1; i <= n; i++)
+    {
+        cout << "depth[" << i << "] = " << depth[i] << '\n';
+        seen[i] = 0;
+    }
+    cout << "glebokosci policzone\n";
+    if(dfs(1, 1) > 1) AP.pb(1);
+    for(int i = 1; i <= n; i++)
+    {
+        cout << "low[" << i << "] = " << low[i] << '\n';
+    }
+    cout << "dfs policzony\n";
+    for(int xd : AP)
+    {
+        cout << xd << ", ";
+    }
+    nl;
+    for(auto xd : mosty)
+    {
+        cout << "(" << xd.first << ", " << xd.second << "); ";
+    }
+    nl;
 }
 
 /*
-
+6 7
+1 2
+2 3
+3 1
+3 4
+4 5
+5 6
+6 4
 */
