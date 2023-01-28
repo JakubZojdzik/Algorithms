@@ -1,55 +1,58 @@
+/*
+    Jakub Żojdzik
+    28-01-2023
+*/
+
 #include <bits/stdc++.h>
+#ifdef LOCAL
+#include "debug.hpp"
+#else
+#define debug(...)
+#define dt
+#endif
 using namespace std;
 
-vector<int> zbior[100005];
-int tab[100005];
+typedef long long ll;
+typedef unsigned long long ull;
+typedef double db;
+typedef pair<int, int> pii;
+typedef pair<long long, long long> pll;
+typedef vector<int> vi;
+typedef vector<long long> vll;
+typedef vector<pair<int, int>> vpii;
+typedef vector<pair<long long, long long>> vpll;
+
+#define fi first
+#define se second
+#define pb push_back
+#define rep(i, x, y) for(ll i = (ll)x; i <= (ll)y; i++)
+#define all(x) x.begin(), x.end()
+#define sz(x) (ll)(x).size()
+#define nl cout << '\n'
+
+int wsk[500007];
+
+int get(int x)
+{
+    if(x == wsk[x]) return x;
+    return get(wsk[x]);
+}
+
+bool unit(int x, int y)
+{
+    if(get(x) == get(y)) return false;
+    
+
+}
 
 int main()
 {
-    cin.tie(NULL);cout.tie(NULL);
-    ios_base::sync_with_stdio(false);
+    cout.tie(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-    int liczb, zapytan;
-    cin >> liczb >> zapytan;
-    for(int i = 1; i <= liczb; i++)
-    {
-        tab[i] = i;
-        zbior[i].push_back(i);
-    }
-    for(int i = 0; i < zapytan; i++)
-    {
-        string typ;
-        int l1, l2;
-        cin >> typ >> l1 >> l2;
-        if(typ[0] == 'u')
-        {
-            if(zbior[tab[l2]].size() < zbior[tab[l1]].size()) swap(l1, l2); //tab[l1] jest mniejsze
-            int z1 = tab[l1];
-            int z2 = tab[l2];
-            if(z1 == z2)
-                continue;
-
-            int roz = zbior[z1].size();
-            for(int j = 0; j < roz; j++)
-            {
-                zbior[z2].push_back(zbior[z1][j]);
-                tab[zbior[z1][j]] = tab[l2];
-            }
-        }
-        else
-        {
-            if(tab[l1] == tab[l2])
-                cout << "YES\n";
-            else cout << "NO\n";
-        }
-        
-    }
+    
 }
 
 /*
-4 4
-union 1 2
-union 1 3
-get 1 4
-get 2 3
+
 */
