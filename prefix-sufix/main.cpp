@@ -23,7 +23,3 @@ int main()
         ps[i] = b;
     }
 }
-
-/*
-aabaababaa
-*/
