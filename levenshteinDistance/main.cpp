@@ -6,12 +6,12 @@ string a, b;
 
 int main()
 {
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin.tie(NULL); cout.tie(NULL);
     ios_base::sync_with_stdio(false);
+
     cin >> a >> b;
-    int n = a.length();
-    int m = b.length();
+    int n = int(a.size());
+    int m = int(b.size());
     for (int i = 0; i <= n; i++)
         dp[i][0] = i;
     for (int i = 0; i <= m; i++)
@@ -26,5 +26,5 @@ int main()
             dp[i][j] = min(min(dp[i - 1][j] + 1, dp[i][j - 1] + 1), dp[i - 1][j - 1] + cost);
         }
     }
-    cout << "aby przejsc od slowa " << a << " do " << b << " potrzebujemy " << dp[n][m] << " operacji prostych\n";
+    cout << dp[n][m] << '\n';
 }
