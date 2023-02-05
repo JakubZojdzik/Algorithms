@@ -2,94 +2,42 @@
 using namespace std;
 typedef long long ll;
 
-long long A[1007][1007], B[1007][1007], temp[1007][1007], wynik[1007][1007];
-int n, pot;
-
-void jeden(ll (&tab)[1007][1007])
+ll nthFib(ll val)
 {
-    for (int i = 0; i < n; i++)
+    ll a = 1, b = 0, c = 0, d = 1;
+    ll x = 1, y = 1, z = 1, w = 0;
+    while(val)
     {
-        for (int j = 0; j < n; j++)
+        if(val & 1)
         {
-            if(i == j)
-                tab[i][j] = 1;
-            else
-                tab[i][j] = 0;
+            ll tmpa = a*x + b*z;
+            ll tmpb = a*y + b*w;
+            ll tmpc = c*x + d*z;
+            ll tmpd = c*y + d*w;
+            a = tmpa;
+            b = tmpb;
+            c = tmpc;
+            d = tmpd;
         }
+        ll tmpx = x*x + y*z;
+        ll tmpy = x*y + y*w;
+        ll tmpz = z*x + w*z;
+        ll tmpw = z*y + w*w;
+        x = tmpx;
+        y = tmpy;
+        z = tmpz;
+        w = tmpw;
+        val /= 2;
     }
-}
-
-void mnoz(ll (&x)[1007][1007], ll (&y)[1007][1007], ll (&rez)[1007][1007])
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            wynik[i][j] = 0;
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            for (int k = 0; k < n; k++)
-            {
-                wynik[i][j] += x[i][k] * y[k][j];
-            }
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            rez[i][j] = wynik[i][j];
-        }
-    }
-}
-
-void macPow(int ptg)
-{
-    jeden(B);
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            temp[i][j] = A[i][j];
-        }
-    }
-    int aktu = 0;
-    int wartpot = 0;
-    while (ptg > 0)
-    {
-        if(ptg & 1)
-        {
-            while (aktu < wartpot)
-            {
-                mnoz(temp, temp, temp);
-                aktu++;
-            }
-            mnoz(temp, B, B);
-        }
-        ptg >>= 1;
-        wartpot++;
-    }
-}
-
-ll nthFib(ll k)
-{
-    n = 2;
-    A[0][0] = 1;
-    A[0][1] = 1;
-    A[1][0] = 1;
-    A[1][1] = 0;
-    macPow(k-1);
-    return B[0][0];
+    return b;
 }
 
 int main()
 {
-    cin.tie(NULL);
-    cout.tie(NULL);
-    ios_base::sync_with_stdio(false);
-    cout << nthFib(6) << '\n';
+    cin.tie(0); cout.tie(0);
+    ios_base::sync_with_stdio(0);
+
+    ll n;
+    cin >> n;
+    cout << nthFib(n) << '\n';
 }
