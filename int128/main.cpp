@@ -36,29 +36,11 @@ int main()
 {
     cout.tie(0);
     cin.tie(0)->sync_with_stdio(0);
-    
+
     lint a, b;
     a = read();
     b = read();
-    
-    if(a > b)
-    {
-        print(a);
-        cout << " > ";
-        print(b);
-        cout << '\n';
-    }
-    else
-    {
-        print(a);
-        cout << " < ";
-        print(b);
-        cout << '\n';
-    }
+
+    lint c = a+b;
+    print(c);
 }
-
-/*
-123456789012345678901234567890
-987654321009876543210987654321
-
-*/
