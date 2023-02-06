@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 typedef long long ll;
 
 ll tree[2000007];
@@ -59,14 +58,3 @@ int main()
     add(3, 7, 5);
     cout << query(0, 7) << '\n';
 }
-
-/*
-0 1 2 3 4 5 6 7
-0 0 0 0 0 0 0 0   0
-0 4 4 4 0 0 0 0   12
-1 5 5 5 1 1 1 1   20
-1 5 5 5 -1 1 1 1  18
-1 5 5 10 4 6 6 6  43
-
-
-*/
