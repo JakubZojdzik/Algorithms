@@ -1,34 +1,5 @@
-/*
-    Jakub Żojdzik
-    17-01-2023
-*/
-
 #include <bits/stdc++.h>
-#ifdef LOCAL
-#include "debug.hpp"
-#else
-#define debug(...)
-#define dt
-#endif
 using namespace std;
-
-typedef long long ll;
-typedef unsigned long long ull;
-typedef double db;
-typedef pair<int, int> pii;
-typedef pair<long long, long long> pll;
-typedef vector<int> vi;
-typedef vector<long long> vll;
-typedef vector<pair<int, int>> vpii;
-typedef vector<pair<long long, long long>> vpll;
-
-#define fi first
-#define se second
-#define pb push_back
-#define rep(i, x, y) for(ll i = (ll)x; i <= (ll)y; i++)
-#define all(x) x.begin(), x.end()
-#define sz(x) (ll)(x).size()
-#define nl cout << '\n'
 
 set<int> kraw[200007];
 int wag[200007], parent[200007];
@@ -68,7 +39,7 @@ void build(int v, int from)
     }
     parent[v] = from;
 
-    vi tmp(kraw[c].begin(), kraw[c].end());
+    vector<int> tmp(kraw[c].begin(), kraw[c].end());
     for(auto x : tmp)
     {
         kraw[c].erase(x); kraw[x].erase(c);
@@ -83,7 +54,7 @@ int main()
 
     int n, a, b;
     cin >> n;
-    rep(i, 0, n-2)
+    for(int i = 0; i < n-1; i++)
     {
         cin >> a >> b;
         kraw[a].insert(b);

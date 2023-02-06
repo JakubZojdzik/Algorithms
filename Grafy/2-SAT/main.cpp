@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-/////////////////
+
 vector<int> kraw[307];
 int skladowa[307];
 bool seen[307];
@@ -22,8 +22,7 @@ void dfs(int a)
 
 int main()
 {
-    cin.tie(0);
-    cout.tie(0);
+    cin.tie(0); cout.tie(0);
     ios_base::sync_with_stdio(0);
     int n, m, a, b, c;
     cin >> n >> m;
