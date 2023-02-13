@@ -2,33 +2,32 @@
 using namespace std;
 typedef __int128 lint;
 
-lint read()
+lint readlint()
 {
-    lint x = 0, f = 1;
-    char ch = getchar();
-    while (ch < '0' || ch > '9')
+    lint a = 0, b = 1;
+    char c = getchar();
+    if(c == '-')
     {
-        if (ch == '-')
-            f = -1;
-        ch = getchar();
+        b = -1;
+        c = getchar();
     }
-    while (ch >= '0' && ch <= '9')
+    while(c >= '0' && c <= '9')
     {
-        x = x * 10 + ch - '0';
-        ch = getchar();
+        a = 10*a + c - '0';
+        c = getchar();
     }
-    return x * f;
+    return a * b;
 }
 
-void print(lint x)
+void printlint(lint x)
 {
-    if (x < 0)
+    if(x < 0)
     {
-        cout << '-';
+        cout << "-";
         x = -x;
     }
-    if (x > 9)
-        print(x / 10);
+    if(x > 9)
+        printlint(x / 10);
     cout << char(x % 10 + '0');
 }
 
@@ -38,9 +37,14 @@ int main()
     cin.tie(0)->sync_with_stdio(0);
 
     lint a, b;
-    a = read();
-    b = read();
+    a = readlint();
+    b = readlint();
 
     lint c = a+b;
-    print(c);
+    printlint(c);
+    cout << '\n';
 }
+
+/*
+
+*/
