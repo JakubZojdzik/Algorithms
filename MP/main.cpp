@@ -6,12 +6,11 @@ int ps[1000007]; // tablica długości maksymalnych prefikso-sufiksów
 
 int main()
 {
-    cin.tie(NULL); cout.tie(NULL);
-    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    ios_base::sync_with_stdio(0);
 
     cin >> P >> T;
     int n = int(P.size());
-    if(P.size() > T.size()) return 0;
     P = "!" + P;
     T = "!" + T;
     int k = -1;
@@ -36,7 +35,7 @@ int main()
         {
             cout << i << '\n';
         }
-        i = i+j-ps[j];
+        i += j-ps[j];
         j = max(0, ps[j]);
     }
 }
