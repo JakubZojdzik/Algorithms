@@ -1,18 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int parent[500007], height[500007];
+int parent[500007], setsz[500007];
 
 void make_set(int v)
 {
     parent[v] = v;
-    height[v] = 0;
+    setsz[v] = 1;
 }
 
 int find_set(int v)
 {
     if(parent[v] == v) return v;
-    return find_set(parent[v]);
+    return parent[v] = find_set(parent[v]);
 }
 
 void union_sets(int a, int b)
@@ -21,9 +21,9 @@ void union_sets(int a, int b)
     int br = find_set(b);
     if(ar != br)
     {
-        if(height[ar] < height[br]) swap(ar, br);
+        if(setsz[ar] < setsz[br]) swap(ar, br);
         parent[br] = ar;
-        if(height[ar] == height[br]) height[ar]++;
+        setsz[ar] += setsz[br];
     }
 }
 
